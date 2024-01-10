@@ -1,0 +1,54 @@
+{
+  "name": "verdaccio-package-diff",
+  "version": "0.0.1",
+  "description": "A package diff plugin for Verdaccio",
+  "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RightCapitalHQ/verdaccio-package-diff.git"
+  },
+  "packageManager": "pnpm@8.14.0",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "license": "MIT",
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "tsc",
+    "lint": "pnpm run prettier:lint && pnpm run eslint:lint",
+    "lint:fix": "pnpm run eslint:fix && pnpm run prettier:fix",
+    "eslint:lint": "eslint --max-warnings=0 .",
+    "eslint:fix": "eslint --max-warnings=0 --fix .",
+    "prettier:lint": "prettier --check .",
+    "prettier:fix": "prettier --write -l .",
+    "prepare": "husky install"
+  },
+  "keywords": [
+    "verdaccio",
+    "package diff"
+  ],
+  "config": {
+    "commitizen": {
+      "path": "@commitlint/cz-commitlint"
+    }
+  },
+  "dependencies": {
+    "express": "4.18.2",
+    "jwt-decode": "4.0.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "18.4.4",
+    "@commitlint/config-conventional": "18.4.4",
+    "@commitlint/cz-commitlint": "18.4.4",
+    "@rightcapital/eslint-config-typescript": "17.0.1",
+    "@rightcapital/prettier-config": "6.0.9",
+    "@types/express": "4.17.21",
+    "@types/node": "20",
+    "@verdaccio/types": "10.8.0",
+    "commitizen": "4.3.0",
+    "eslint": "8.56.0",
+    "husky": "8.0.3",
+    "prettier": "3.1.1",
+    "typescript": "5.3.3"
+  }
+}

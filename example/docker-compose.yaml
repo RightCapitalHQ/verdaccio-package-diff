@@ -1,0 +1,19 @@
+version: '3.1'
+
+services:
+  verdaccio:
+    build: .
+    container_name: 'verdaccio'
+    networks:
+      - node-network
+    environment:
+      - VERDACCIO_PORT=4873
+      - DEBUG=verdaccio*
+    ports:
+      - '4873:4873'
+    volumes:
+      - './config.yaml:/verdaccio/conf/config.yaml'
+      #- './.npmrc:/opt/verdaccio/.npmrc'
+networks:
+  node-network:
+    driver: bridge

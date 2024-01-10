@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Verdaccio Package Diff</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/diff2html/bundles/css/diff2html.min.css"
+    />
+    <style>
+      body {
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="content">
+      <p>Loading...</p>
+    </div>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/diff2html/bundles/js/diff2html.min.js"
+    ></script>
+    <script>
+      const diff2htmlConfig = {
+        drawFileList: true,
+        matching: 'lines',
+      };
+
+      document.addEventListener('DOMContentLoaded', () => {
+        const contentElement = document.querySelector('#content');
+        const token = localStorage.getItem('token');
+
+        const params = new URL(document.location).searchParams;
+        const name = params.get('name');
+        const from = params.get('from');
+        const to = params.get('to');
+
+        if (name && from && to) {
+          fetch(`/-/npm/package-diff/data?name=${name}&from=${from}&to=${to}`, {
+            headers: {
+              Authorization: typeof token === 'string' && `Bearer ${token}`,
+            },
+          })
+            .then((response) => {
+              return response.text();
+            })
+            .then((diffString) => {
+              const diffHtml = Diff2Html.html(diffString, diff2htmlConfig);
+              contentElement.innerHTML = diffHtml;
+            });
+        } else {
+          contentElement.innerHTML = 'Missing required query params.';
+        }
+      });
+    </script>
+  </body>
+</html>

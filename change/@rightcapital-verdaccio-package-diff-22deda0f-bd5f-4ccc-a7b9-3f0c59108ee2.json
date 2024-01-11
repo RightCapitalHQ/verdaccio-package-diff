@@ -1,6 +1,6 @@
 {
-  "type": "major",
-  "comment": "build: release package",
+  "type": "minor",
+  "comment": "feat: update diff2html config",
   "packageName": "@rightcapital/verdaccio-package-diff",
   "email": "zhangjie9477@gmail.com",
   "dependentChangeType": "patch"

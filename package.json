@@ -1,6 +1,6 @@
 {
   "name": "@rightcapital/verdaccio-package-diff",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "A package diff plugin for Verdaccio",
   "main": "dist/index.js",
   "repository": {

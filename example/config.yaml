@@ -175,7 +175,7 @@ server:
 #   content: '{"color":"green","message":"New package published: * {{ name }}*","notify":true,"message_format":"text"}'
 
 middlewares:
-  package-diff:
+  '@rightcapital/verdaccio-package-diff':
     enabled: true
 
 # https://verdaccio.org/docs/logger

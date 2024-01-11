@@ -1,5 +1,18 @@
 # Verdaccio Package Diff Plugin
 
+<!-- Badges area start -->
+
+[![made by RightCapital](https://img.shields.io/badge/made_by-RightCapital-5070e6)](https://rightcapital.com)
+![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/RightCapitalHQ/verdaccio-package-diff/ci.yml)
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-%23FE5196?logo=conventionalcommits&logoColor=white)](https://conventionalcommits.org)
+[![RightCapital frontend style guide](https://img.shields.io/badge/code_style-RightCapital-5c4c64?labelColor=f0ede8)](https://github.com/RightCapitalHQ/frontend-style-guide)
+
+<!-- Badges area end -->
+
+## Introduce
+
+If you want to know what has changed between the two versions in the package, this plugin can tell you.
+
 ## How to use
 
 To view the diffs between two versions of a package, go to:

@@ -47,8 +47,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          persist-credentials: false
       - uses: pnpm/action-setup@v2
       - uses: actions/setup-node@v4
         with:
@@ -76,4 +74,4 @@ jobs:
           npm config set //registry.npmjs.org/:_authToken "${NPM_TOKEN}"
           git config --local user.email "npm-publisher@rightcapital.com"
           git config --local user.name "GitHub Actions[bot]"
-          pnpm beachball publish --yes -m 'chore(release): applying package updates'
+          pnpm beachball publish --access public --yes -m 'chore(release): applying package updates'

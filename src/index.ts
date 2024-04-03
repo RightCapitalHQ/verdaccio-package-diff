@@ -119,10 +119,10 @@ export default class VerdaccioMiddlewarePlugin
                 { signal },
               );
 
-              if (npmDiff.error) {
-                textTypeResponse(req, res, next)(npmDiff.error.toString());
+              if (npmDiff.status !== 0) {
+                textTypeResponse(req, res, next)(npmDiff.stderr.toString());
               } else {
-                textTypeResponse(req, res, next)(npmDiff.output.toString());
+                textTypeResponse(req, res, next)(npmDiff.stdout.toString());
               }
             }
           },

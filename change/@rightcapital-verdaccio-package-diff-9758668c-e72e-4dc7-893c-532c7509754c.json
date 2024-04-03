@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "fix: handling the error output of the npm diff command",
+  "packageName": "@rightcapital/verdaccio-package-diff",
+  "email": "zhangjie9477@gmail.com",
+  "dependentChangeType": "patch"
+}

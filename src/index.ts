@@ -47,14 +47,11 @@ const textTypeResponse =
     next();
   };
 
-const internalServerErrorResponse = (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
-  res.status(500);
-  next();
-};
+const internalServerErrorResponse =
+  (req: Request, res: Response, next: NextFunction) => (error: Error) => {
+    res.status(500).send({ error: String(error) });
+    next();
+  };
 
 export default class VerdaccioMiddlewarePlugin
   implements IPluginMiddleware<ICustomConfig>
@@ -109,29 +106,36 @@ export default class VerdaccioMiddlewarePlugin
               const controller = new AbortController();
               const { signal } = controller;
 
-              const npmDiff = spawnSync(
-                'npm',
-                [
-                  'diff',
-                  `--diff=${name as string}@${from as string}`,
-                  `--diff=${name as string}@${to as string}`,
-                ],
-                { signal },
-              );
-
-              if (npmDiff.status !== 0) {
-                textTypeResponse(req, res, next)(npmDiff.stderr.toString());
-              } else {
-                textTypeResponse(req, res, next)(npmDiff.stdout.toString());
+              try {
+                const npmDiff = spawnSync(
+                  'npm',
+                  [
+                    'diff',
+                    `--diff=${name as string}@${from as string}`,
+                    `--diff=${name as string}@${to as string}`,
+                  ],
+                  { signal },
+                );
+                if (npmDiff.status !== 0) {
+                  textTypeResponse(req, res, next)(npmDiff.stderr.toString());
+                } else {
+                  textTypeResponse(req, res, next)(npmDiff.stdout.toString());
+                }
+              } catch (npmDiffUnexpectedError) {
+                internalServerErrorResponse(
+                  req,
+                  res,
+                  next,
+                )(npmDiffUnexpectedError as Error);
               }
             }
           },
         );
-      } catch (error) {
-        if (error instanceof InvalidTokenError) {
+      } catch (unexpectedError) {
+        if (unexpectedError instanceof InvalidTokenError) {
           unauthorizedResponse(req, res, next);
         }
-        internalServerErrorResponse(req, res, next);
+        internalServerErrorResponse(req, res, next)(unexpectedError as Error);
       }
     });
 

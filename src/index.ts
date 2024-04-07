@@ -1,4 +1,4 @@
-import { spawnSync } from 'node:child_process';
+import { spawn } from 'node:child_process';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import type {
@@ -106,28 +106,41 @@ export default class VerdaccioMiddlewarePlugin
               const controller = new AbortController();
               const { signal } = controller;
 
-              try {
-                const npmDiff = spawnSync(
-                  'npm',
-                  [
-                    'diff',
-                    `--diff=${name as string}@${from as string}`,
-                    `--diff=${name as string}@${to as string}`,
-                  ],
-                  { signal },
-                );
-                if (npmDiff.status !== 0) {
-                  textTypeResponse(req, res, next)(npmDiff.stderr.toString());
+              const npmDiff = spawn(
+                'npm',
+                [
+                  'diff',
+                  `--diff=${name as string}@${from as string}`,
+                  `--diff=${name as string}@${to as string}`,
+                ],
+                { signal },
+              );
+              let outputData = '';
+              let errorData = '';
+
+              npmDiff.stdout.on('data', (data: Buffer) => {
+                outputData += data.toString();
+              });
+
+              npmDiff.stderr.on('data', (data: Buffer) => {
+                errorData += data.toString();
+              });
+
+              npmDiff.on('close', (code) => {
+                if (code !== 0) {
+                  textTypeResponse(req, res, next)(errorData);
                 } else {
-                  textTypeResponse(req, res, next)(npmDiff.stdout.toString());
+                  textTypeResponse(req, res, next)(outputData);
                 }
-              } catch (npmDiffUnexpectedError) {
+              });
+
+              npmDiff.on('error', (npmDiffUnexpectedError) => {
                 internalServerErrorResponse(
                   req,
                   res,
                   next,
-                )(npmDiffUnexpectedError as Error);
-              }
+                )(npmDiffUnexpectedError);
+              });
             }
           },
         );

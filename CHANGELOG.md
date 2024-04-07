@@ -1,8 +1,16 @@
 # Change Log - @rightcapital/verdaccio-package-diff
 
-This log was last generated on Sun, 07 Apr 2024 05:37:21 GMT and should not be manually modified.
+This log was last generated on Sun, 07 Apr 2024 06:23:19 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.1.6
+
+Sun, 07 Apr 2024 06:23:19 GMT
+
+### [1.1.6](https://github.com/RightCapitalHQ/verdaccio-package-diff/tree/%40rightcapital%2Fverdaccio-package-diff_v1.1.6) (2024-4-7)
+
+- fix: use asynchronous processing ([5b6bed1](https://github.com/RightCapitalHQ/verdaccio-package-diff/commit/5b6bed193954c9e60c25fc84e40e914dd80c3f4a))
 
 ## 1.1.5
 

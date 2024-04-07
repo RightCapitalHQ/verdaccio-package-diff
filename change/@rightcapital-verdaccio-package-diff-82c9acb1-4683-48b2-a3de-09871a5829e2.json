@@ -1,0 +1,7 @@
+{
+  "type": "none",
+  "comment": "fix: update docker container configuration",
+  "packageName": "@rightcapital/verdaccio-package-diff",
+  "email": "zhangjie9477@gmail.com",
+  "dependentChangeType": "none"
+}

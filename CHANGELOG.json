@@ -2,6 +2,21 @@
   "name": "@rightcapital/verdaccio-package-diff",
   "entries": [
     {
+      "date": "Sun, 07 Apr 2024 06:41:43 GMT",
+      "version": "1.1.6",
+      "tag": "@rightcapital/verdaccio-package-diff_v1.1.6",
+      "comments": {
+        "none": [
+          {
+            "author": "zhangjie9477@gmail.com",
+            "package": "@rightcapital/verdaccio-package-diff",
+            "commit": "d5efb09aab42c80ee84a92c62244349de0e97c2f",
+            "comment": "fix: update docker container configuration"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sun, 07 Apr 2024 06:23:19 GMT",
       "version": "1.1.6",
       "tag": "@rightcapital/verdaccio-package-diff_v1.1.6",

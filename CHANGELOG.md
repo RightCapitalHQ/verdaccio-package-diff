@@ -1,8 +1,16 @@
 # Change Log - @rightcapital/verdaccio-package-diff
 
-This log was last generated on Wed, 03 Apr 2024 03:34:49 GMT and should not be manually modified.
+This log was last generated on Sun, 07 Apr 2024 05:37:21 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.1.5
+
+Sun, 07 Apr 2024 05:37:21 GMT
+
+### [1.1.5](https://github.com/RightCapitalHQ/verdaccio-package-diff/tree/%40rightcapital%2Fverdaccio-package-diff_v1.1.5) (2024-4-7)
+
+- fix: catch unexpected error ([2230dc5](https://github.com/RightCapitalHQ/verdaccio-package-diff/commit/2230dc5ed5ba96fc2300b97b33651f01bd2b9bba))
 
 ## 1.1.4
 

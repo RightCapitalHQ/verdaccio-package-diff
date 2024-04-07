@@ -2,6 +2,21 @@
   "name": "@rightcapital/verdaccio-package-diff",
   "entries": [
     {
+      "date": "Sun, 07 Apr 2024 05:37:21 GMT",
+      "version": "1.1.5",
+      "tag": "@rightcapital/verdaccio-package-diff_v1.1.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "zhangjie9477@gmail.com",
+            "package": "@rightcapital/verdaccio-package-diff",
+            "commit": "2230dc5ed5ba96fc2300b97b33651f01bd2b9bba",
+            "comment": "fix: catch unexpected error"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 03 Apr 2024 03:34:49 GMT",
       "version": "1.1.4",
       "tag": "@rightcapital/verdaccio-package-diff_v1.1.4",

@@ -1,8 +1,16 @@
 # Change Log - @rightcapital/verdaccio-package-diff
 
-This log was last generated on Sun, 07 Apr 2024 06:23:19 GMT and should not be manually modified.
+This log was last generated on Wed, 10 Apr 2024 05:20:53 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.1.7
+
+Wed, 10 Apr 2024 05:20:53 GMT
+
+### [1.1.7](https://github.com/RightCapitalHQ/verdaccio-package-diff/tree/%40rightcapital%2Fverdaccio-package-diff_v1.1.7) (2024-4-10)
+
+- fix: display unauthorized error ([b198fa5](https://github.com/RightCapitalHQ/verdaccio-package-diff/commit/b198fa5b56ec7604fef8fa4026a2df5f0d1c3456))
 
 ## 1.1.6
 

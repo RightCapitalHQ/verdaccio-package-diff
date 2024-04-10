@@ -36,7 +36,7 @@ const unauthorizedResponse = (
   res: Response,
   next: NextFunction,
 ) => {
-  res.status(401);
+  res.status(401).send();
   next();
 };
 
@@ -147,8 +147,9 @@ export default class VerdaccioMiddlewarePlugin
       } catch (unexpectedError) {
         if (unexpectedError instanceof InvalidTokenError) {
           unauthorizedResponse(req, res, next);
+        } else {
+          internalServerErrorResponse(req, res, next)(unexpectedError as Error);
         }
-        internalServerErrorResponse(req, res, next)(unexpectedError as Error);
       }
     });
 

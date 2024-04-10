@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "fix: display unauthorized error",
+  "packageName": "@rightcapital/verdaccio-package-diff",
+  "email": "zhangjie9477@gmail.com",
+  "dependentChangeType": "patch"
+}

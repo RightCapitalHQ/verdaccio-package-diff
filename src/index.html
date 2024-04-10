@@ -44,14 +44,23 @@
             headers: {
               Authorization: typeof token === 'string' && `Bearer ${token}`,
             },
-          })
-            .then((response) => {
-              return response.text();
-            })
-            .then((diffString) => {
-              const diffHtml = Diff2Html.html(diffString, diff2htmlConfig);
-              contentElement.innerHTML = diffHtml;
-            });
+          }).then(async (response) => {
+            if (response.status === 401) {
+              const fragment = document.createDocumentFragment();
+              const linkElement = document.createElement('a');
+              linkElement.href = window.origin;
+              linkElement.text = 'Please login first.';
+              fragment.append(linkElement);
+              contentElement.replaceChildren(fragment);
+            }
+            if (response.status === 200) {
+              const diffString = await response.text();
+              contentElement.innerHTML = Diff2Html.html(
+                diffString,
+                diff2htmlConfig,
+              );
+            }
+          });
         } else {
           contentElement.innerHTML = 'Missing required query params.';
         }

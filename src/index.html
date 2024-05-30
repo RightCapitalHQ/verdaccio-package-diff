@@ -38,13 +38,17 @@
         const name = params.get('name');
         const from = params.get('from');
         const to = params.get('to');
+        const filter = params.get('filter');
 
         if (name && from && to) {
-          fetch(`/-/npm/package-diff/data?name=${name}&from=${from}&to=${to}`, {
-            headers: {
-              Authorization: typeof token === 'string' && `Bearer ${token}`,
+          fetch(
+            `/-/npm/package-diff/data?name=${name}&from=${from}&to=${to}&filter=${filter}`,
+            {
+              headers: {
+                Authorization: typeof token === 'string' && `Bearer ${token}`,
+              },
             },
-          }).then(async (response) => {
+          ).then(async (response) => {
             if (response.status === 401) {
               const fragment = document.createDocumentFragment();
               const linkElement = document.createElement('a');

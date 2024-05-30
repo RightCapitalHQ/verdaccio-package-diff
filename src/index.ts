@@ -79,7 +79,7 @@ export default class VerdaccioMiddlewarePlugin
     const router = Router();
 
     router.get('/data', (req: Request, res: Response, next: NextFunction) => {
-      const { name, from, to } = req.query;
+      const { name, from, to, filter = '.' } = req.query;
       const authorizationToken = req.get('Authorization');
 
       if (!name || !from || !to) {
@@ -110,6 +110,7 @@ export default class VerdaccioMiddlewarePlugin
                 'npm',
                 [
                   'diff',
+                  filter as string,
                   `--diff=${name as string}@${from as string}`,
                   `--diff=${name as string}@${to as string}`,
                 ],

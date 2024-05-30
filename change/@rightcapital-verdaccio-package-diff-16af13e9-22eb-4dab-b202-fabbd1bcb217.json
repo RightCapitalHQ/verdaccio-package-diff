@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "feat: support filtering files",
-  "packageName": "@rightcapital/verdaccio-package-diff",
-  "email": "zhangjie9477@gmail.com",
-  "dependentChangeType": "patch"
-}

@@ -1,8 +1,16 @@
 # Change Log - @rightcapital/verdaccio-package-diff
 
-This log was last generated on Wed, 10 Apr 2024 05:20:53 GMT and should not be manually modified.
+This log was last generated on Thu, 30 May 2024 09:46:29 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.2.0
+
+Thu, 30 May 2024 09:46:29 GMT
+
+## [1.2.0](https://github.com/RightCapitalHQ/verdaccio-package-diff/tree/%40rightcapital%2Fverdaccio-package-diff_v1.2.0) (2024-5-30)
+
+- feat: support filtering files ([a20c4ae](https://github.com/RightCapitalHQ/verdaccio-package-diff/commit/a20c4aeeae27007c01e47a7235c1017e8ced0d6d))
 
 ## 1.1.7
 

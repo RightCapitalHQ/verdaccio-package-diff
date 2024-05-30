@@ -41,14 +41,17 @@
         const filter = params.get('filter');
 
         if (name && from && to) {
-          fetch(
-            `/-/npm/package-diff/data?name=${name}&from=${from}&to=${to}&filter=${filter}`,
-            {
-              headers: {
-                Authorization: typeof token === 'string' && `Bearer ${token}`,
-              },
+          const query = new URLSearchParams({ name: name, from: from, to: to });
+
+          if (filter) {
+            query.append('filter', filter);
+          }
+
+          fetch(`/-/npm/package-diff/data?${query.toString()}`, {
+            headers: {
+              Authorization: typeof token === 'string' && `Bearer ${token}`,
             },
-          ).then(async (response) => {
+          }).then(async (response) => {
             if (response.status === 401) {
               const fragment = document.createDocumentFragment();
               const linkElement = document.createElement('a');

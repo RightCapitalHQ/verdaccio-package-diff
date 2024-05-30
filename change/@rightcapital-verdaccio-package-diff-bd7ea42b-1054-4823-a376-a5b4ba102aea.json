@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "fix: ignore empty filter value",
-  "packageName": "@rightcapital/verdaccio-package-diff",
-  "email": "zhangjie9477@gmail.com",
-  "dependentChangeType": "patch"
-}

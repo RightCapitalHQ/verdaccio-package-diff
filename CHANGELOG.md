@@ -1,8 +1,16 @@
 # Change Log - @rightcapital/verdaccio-package-diff
 
-This log was last generated on Thu, 30 May 2024 09:46:29 GMT and should not be manually modified.
+This log was last generated on Thu, 30 May 2024 10:00:50 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.2.1
+
+Thu, 30 May 2024 10:00:50 GMT
+
+### [1.2.1](https://github.com/RightCapitalHQ/verdaccio-package-diff/tree/%40rightcapital%2Fverdaccio-package-diff_v1.2.1) (2024-5-30)
+
+- fix: ignore empty filter value ([6a75d47](https://github.com/RightCapitalHQ/verdaccio-package-diff/commit/6a75d4743ce8b2a7bda699ad27bdbacf9653c1bb))
 
 ## 1.2.0
 

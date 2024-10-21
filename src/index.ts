@@ -1,21 +1,23 @@
 import { spawn } from 'node:child_process';
 import fs from 'node:fs/promises';
 import path from 'node:path';
+
 import type {
-  Logger,
-  IPluginMiddleware,
   IBasicAuth,
+  IPluginMiddleware,
+  Logger,
   PluginOptions,
   RemoteUser,
 } from '@verdaccio/types';
 import {
-  Router,
+  type Application,
+  type NextFunction,
   type Request,
   type Response,
-  type NextFunction,
-  type Application,
+  Router,
 } from 'express';
-import { jwtDecode, InvalidTokenError } from 'jwt-decode';
+import { InvalidTokenError, jwtDecode } from 'jwt-decode';
+
 import type { ICustomConfig } from './types';
 
 const htmlFilePath = path.resolve(__dirname, '../src/index.html');

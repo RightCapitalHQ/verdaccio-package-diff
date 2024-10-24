@@ -8,11 +8,7 @@
     "strictNullChecks": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "rootDir": "./src",
-    "outDir": "./dist",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true
-  },
-  "exclude": ["node_modules"],
-  "include": ["src/**/*.ts"]
+  }
 }

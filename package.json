@@ -21,9 +21,9 @@
     "eslint:fix": "eslint --max-warnings=0 --fix .",
     "prettier:lint": "prettier --check .",
     "prettier:fix": "prettier --write -l .",
-    "prepare": "husky install",
-    "change": "beachball change --no-commit",
-    "check": "beachball check"
+    "prepare": "husky",
+    "change": "nx release plan",
+    "check": "nx release plan:check"
   },
   "keywords": [
     "verdaccio",
@@ -47,10 +47,10 @@
     "@types/express": "4.17.21",
     "@types/node": "20",
     "@verdaccio/types": "10.8.0",
-    "beachball": "2.39.0",
+    "nx": "22.0.2",
     "commitizen": "4.3.0",
     "eslint": "9.13.0",
-    "husky": "8.0.3",
+    "husky": "9.1.7",
     "prettier": "3.1.1",
     "typescript": "5.3.3"
   }

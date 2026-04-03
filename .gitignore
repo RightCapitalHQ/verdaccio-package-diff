@@ -5,3 +5,8 @@ npm-debug.log*
 .pnpm-debug.log*
 node_modules/
 dist/
+
+# nx
+/.nx/cache
+/.nx/workspace-data
+!/.nx/version-plans/

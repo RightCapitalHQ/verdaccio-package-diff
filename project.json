@@ -1,0 +1,7 @@
+{
+  "$schema": "./node_modules/nx/schemas/project-schema.json",
+  "name": "@rightcapital/verdaccio-package-diff",
+  "projectType": "library",
+  "sourceRoot": "src",
+  "targets": {}
+}

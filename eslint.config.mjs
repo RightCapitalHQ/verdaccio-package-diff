@@ -4,7 +4,7 @@ const { config } = eslintConfigRightcapital.utils;
 
 export default config(
   {
-    ignores: ['dist'],
+    ignores: ['dist', 'scripts'],
   },
   ...eslintConfigRightcapital.configs.recommended,
 );

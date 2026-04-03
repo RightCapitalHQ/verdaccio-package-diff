@@ -9,9 +9,9 @@ jobs:
   install:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
           node-version-file: .node-version
           cache: pnpm
@@ -21,9 +21,9 @@ jobs:
     needs: install
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
           node-version-file: .node-version
           cache: pnpm
@@ -36,40 +36,77 @@ jobs:
     needs: install
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: docker://rhysd/actionlint:1.6.26
         with:
           args: -color
 
-  publish:
-    if: ${{ always() && !failure() && !cancelled() }}
-    needs: [test, check-workflow-files]
+  check-version-plan:
+    needs: install
+    if: github.base_ref == github.event.repository.default_branch && github.head_ref != 'release' && !startsWith(github.head_ref, 'renovate/')
     runs-on: ubuntu-latest
-    permissions:
-      id-token: write
-      contents: read
     steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Prepare pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Prepare Node.js
+        uses: actions/setup-node@v6
         with:
           node-version-file: .node-version
           cache: pnpm
-      - run: pnpm install
-      - run: pnpm run build
 
-      - name: Publish (development)
-        if: github.event.pull_request.head.repo.full_name == 'RightCapitalHQ/verdaccio-package-diff' && github.base_ref == github.event.repository.default_branch
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Set SHAs for Nx
+        uses: nrwl/nx-set-shas@v4
+
+      - name: Check version plan
+        run: pnpm exec nx release plan:check
+
+  check-renovate-version-plan:
+    needs: install
+    if: startsWith(github.event.pull_request.head.ref, 'renovate/') && github.base_ref == github.event.repository.default_branch
+    uses: RightCapitalHQ/actions/.github/workflows/nx-release-auto-plan.yml@nx-release-auto-plan/v0.4.2
+    secrets: inherit
+
+  prerelease:
+    if: >-
+      !failure() && !cancelled()
+      && github.event_name == 'pull_request'
+      && github.event.pull_request.head.repo.full_name == 'RightCapitalHQ/verdaccio-package-diff'
+      && github.base_ref == github.event.repository.default_branch
+      && github.head_ref != 'release'
+    needs:
+      [
+        test,
+        check-version-plan,
+        check-renovate-version-plan,
+        check-workflow-files,
+      ]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/create-github-app-token@v3
+        id: app-token
+        with:
+          app-id: ${{ secrets.RC_BOT_APP_ID }}
+          private-key: ${{ secrets.RC_BOT_PRIVATE_KEY }}
+          permission-actions: write
+      - name: Trigger prerelease workflow
         env:
-          HEAD_REF: ${{ github.head_ref }}
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          BRANCH_NAME: ${{ github.head_ref }}
+          RUN_NUMBER: ${{ github.run_number }}
+          RUN_ATTEMPT: ${{ github.run_attempt }}
         run: |
-          preid="${HEAD_REF//\//-}".${{ github.run_number }}.${{ github.run_attempt }}
-          pnpm exec npm --no-git-tag-version version prerelease --preid="${preid}"
-          pnpm publish --no-git-checks --access public --tag development
-
-      - name: Publish (main)
-        if: github.repository == 'RightCapitalHQ/verdaccio-package-diff' && github.event_name == 'push' && github.ref_name == github.event.repository.default_branch
-        run: |
-          git config --local user.email "npm-publisher@rightcapital.com"
-          git config --local user.name "GitHub Actions[bot]"
-          pnpm beachball publish --access public --yes -m 'chore(release): applying package updates'
+          gh workflow run release.yml \
+            --repo "$GITHUB_REPOSITORY" \
+            -f prerelease=true \
+            -f "branch_name=${BRANCH_NAME}" \
+            -f "run_number=${RUN_NUMBER}" \
+            -f "run_attempt=${RUN_ATTEMPT}"

@@ -1,3 +1,14 @@
+## 1.2.2 (2026-04-03)
+
+### 🩹 Fixes
+
+- Migrate from beachball to Nx Release workflow. ([626231d](https://github.com/RightCapitalHQ/verdaccio-package-diff/commit/626231d))
+
+### ❤️ Thank You
+
+- Claude Opus 4.6 (1M context)
+- Jiahao Guo @frantic1048
+
 ### [1.2.1](https://github.com/RightCapitalHQ/verdaccio-package-diff/tree/%40rightcapital%2Fverdaccio-package-diff_v1.2.1) (2024-5-30)
 
 - fix: ignore empty filter value ([6a75d47](https://github.com/RightCapitalHQ/verdaccio-package-diff/commit/6a75d4743ce8b2a7bda699ad27bdbacf9653c1bb))
